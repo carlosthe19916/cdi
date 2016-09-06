@@ -17,11 +17,6 @@
 
 package javax.enterprise.inject.spi;
 
-import java.lang.annotation.Annotation;
-import java.lang.reflect.Type;
-import java.util.List;
-import java.util.Set;
-
 import javax.el.ELResolver;
 import javax.el.ExpressionFactory;
 import javax.enterprise.context.ContextNotActiveException;
@@ -33,6 +28,10 @@ import javax.enterprise.inject.AmbiguousResolutionException;
 import javax.enterprise.inject.InjectionException;
 import javax.enterprise.inject.UnsatisfiedResolutionException;
 import javax.enterprise.util.Nonbinding;
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Type;
+import java.util.List;
+import java.util.Set;
 
 /**
  * <p>
@@ -88,6 +87,9 @@ import javax.enterprise.util.Nonbinding;
  * @author Antoine Sabot-Durand
  */
 public interface BeanManager {
+
+
+    <T> InterceptionProxyFactory<T> createInterceptionFactory(CreationalContext<T> cc, Class<T> clazz);
 
     /**
      * <p>
@@ -423,7 +425,7 @@ public interface BeanManager {
      * {@link javax.enterprise.context.Dependent}.
      * 
      * 
-     * @param expressionFactory the {@link javax.el.ExpressionFactory} to wrap
+     * @param expressionFactory the {@link javax.el.ExpressionFactory} to createInterceptionProxy
      * @return the wrapped {@link javax.el.ExpressionFactory}
      */
     public ExpressionFactory wrapExpressionFactory(ExpressionFactory expressionFactory);
